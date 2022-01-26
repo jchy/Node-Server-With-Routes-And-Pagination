@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
                     console.log(req.method ,req.url)
                     // const id = req.url ?? 1;
                     const [link,id] = req.url.split(":");
-                    res.writeHead(200, {'Content-Type' : 'application/json'});
+                    res.writeHead(201, {'Content-Type' : 'application/json'});
                     res.end(JSON.stringify(getUserDetails(Number(id))));
                 }
             }
@@ -24,7 +24,7 @@ const server = http.createServer((req, res) => {
                     const q = new URLSearchParams(`?${query}`);
                     console.log(q)
                     const page = q.get('page') ?? 1;
-                    res.writeHead(200, {'Content-Type' : 'application/json'});
+                    res.writeHead(201, {'Content-Type' : 'application/json'});
                     res.end(JSON.stringify(getAllUsers(Number(page))));
                 }
                 else if(req.method === 'POST'){
@@ -33,13 +33,13 @@ const server = http.createServer((req, res) => {
                     const name = q.get('name');
                     addUser(name);
                     console.log(q.get("name"), "is added to the database");
-                    res.writeHead(200, {'Content-Type' : 'application/json'});
+                    res.writeHead(201, {'Content-Type' : 'application/json'});
                     res.end(JSON.stringify(getAllUsers()));
                 }
             }
             else if(url.startsWith('/users/')){
                 const index = Number(url.split('/')[2]);
-                req.writeHead(200, {'Content-Type' : 'application/json'});
+                req.writeHead(201, {'Content-Type' : 'application/json'});
                 res.end(JSON.stringify(getUser(index)))
             }
             else{
